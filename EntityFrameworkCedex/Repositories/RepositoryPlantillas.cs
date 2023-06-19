@@ -40,7 +40,7 @@ namespace EntityFrameworkCedex.Repositories
             //               where datos.Turno == turno
             //               select datos;
             //return await consulta.ToListAsync();
-            //return await this.context.Plantillas.Where(x => x.Turno == turno).ToListAsync();
+            return await this.context.Plantillas.Where(x => x.Turno == turno).ToListAsync();
         }
     }
 }
