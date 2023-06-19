@@ -31,5 +31,16 @@ namespace EntityFrameworkCedex.Repositories
             //EJEMPLO CON LAMBDA
             return  await this.context.Plantillas.ToListAsync();
         }
+
+        //METODO PARA BUSCAR POR TURNO
+        public async Task<List<Plantilla>> GetPlantillaTurnoAsync(string turno)
+        {
+            //EJEMPLO CON LINQ
+            //var consulta = from datos in this.context.Plantillas
+            //               where datos.Turno == turno
+            //               select datos;
+            //return await consulta.ToListAsync();
+            //return await this.context.Plantillas.Where(x => x.Turno == turno).ToListAsync();
+        }
     }
 }

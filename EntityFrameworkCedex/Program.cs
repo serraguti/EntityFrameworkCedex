@@ -3,6 +3,7 @@ using EntityFrameworkCedex.Models;
 using EntityFrameworkCedex.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Runtime.CompilerServices;
 
 Console.WriteLine("Fundamentos Entity Framework");
 string connectionString = 
@@ -19,4 +20,12 @@ foreach (Plantilla plan in datos)
 {
     Console.WriteLine(plan.IdEmpleado + " - " + plan.Apellido);
 }
+Console.WriteLine("--------------------------");
+List<Plantilla> filtro = await repo.GetPlantillaTurnoAsync("N");
+foreach (Plantilla p in filtro)
+{
+    Console.WriteLine(p.Apellido + ", Turno: " + p.Turno);
+}
+
+
 Console.WriteLine("Fin de Program");
