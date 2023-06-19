@@ -15,6 +15,11 @@ var provider = new ServiceCollection()
 
 //RECUPERAMOS EL REPOSITORY DE LOS SERVICIOS
 RepositoryPlantillas repo = provider.GetService<RepositoryPlantillas>();
+//INSERTAMOS Y LUEGO MOSTRAMOS
+//await repo.CreatePlantillaAsync(1111, "NUEVO", "ALUMNO", "M", 5);
+//await repo.UpdatePlantillaAsync(1111, "UPDATED", "MODIFIED", "T", 6000);
+await repo.DeletePlantillaAsync(1111);
+
 List<Plantilla> datos = await repo.GetPlantillasAsync();
 foreach (Plantilla plan in datos)
 {

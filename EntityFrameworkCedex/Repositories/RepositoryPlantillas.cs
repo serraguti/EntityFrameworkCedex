@@ -43,7 +43,7 @@ namespace EntityFrameworkCedex.Repositories
             return await this.context.Plantillas.Where(x => x.Turno == turno).ToListAsync();
         }
 
-        public async Task CreatePlantilla(int idplantilla, string apellido, string funcion
+        public async Task CreatePlantillaAsync(int idplantilla, string apellido, string funcion
             , string turno, int salario)
         {
             //NECESITAMOS INSTANCIAR UN NUEVO OBJETO MODEL
@@ -58,6 +58,34 @@ namespace EntityFrameworkCedex.Repositories
             //DEBEMOS AÑADIR EL OBJETO A LA COLECCION Dbset DEL CONTEXT
             this.context.Plantillas.Add(plan);
             //PARA REALIZAR EL INSERT, DEBEMOS GUARDAR LOS CAMBIOS
+            await this.context.SaveChangesAsync();
+        }
+
+        //VAMOS A MODIFICAR UN SOLO REGISTRO, PARA ELLO, REALIZAMOS UN 
+        //METODO QUE NOS DEVOLVERA UN REGISTRO POR SU ID
+        public async Task<Plantilla> FindPlantillaByIdAsync(int id)
+        {
+            return await this.context.Plantillas.FirstOrDefaultAsync
+                (z => z.IdEmpleado == id);
+        }
+
+        public async Task DeletePlantillaAsync(int id)
+        {
+            Plantilla plan = await this.FindPlantillaByIdAsync(id);
+            //ELIMINAMOS DE LA COLECCION DEL CONTEXT
+            this.context.Plantillas.Remove(plan);
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task UpdatePlantillaAsync(int id, string apellido, 
+            string funcion, string turno, int salario)
+        {
+            //BUSCAMOS EL OBJETO EN EL CONTEXT
+            Plantilla plan = await this.FindPlantillaByIdAsync(id);
+            plan.Apellido = apellido;
+            plan.Funcion = funcion;
+            plan.Turno = turno;
+            plan.Salario = salario;
             await this.context.SaveChangesAsync();
         }
     }
